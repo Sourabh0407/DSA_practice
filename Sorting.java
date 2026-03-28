@@ -1,6 +1,9 @@
 import java.util.*;
 public class Sorting{
 
+    //-------------------------------------------------------------------------
+    // Bubble Sort
+    //-------------------------------------------------------------------------
     public static void BubbleSort(int[] array)
     {
         int nbArray = array.length;
@@ -28,6 +31,9 @@ public class Sorting{
         }
     }
 
+    //-------------------------------------------------------------------------
+    // Selection Sort
+    //-------------------------------------------------------------------------
     public static void SelectionSort(int[] array)
     {
         int nbArray = array.length;
@@ -36,6 +42,27 @@ public class Sorting{
             int lastIndex = nbArray - i - 1;
             int maxIndex = getMaxIndex(array, 0, lastIndex);
             swap(array, maxIndex, lastIndex);
+        }
+    }
+
+    //-------------------------------------------------------------------------
+    // Insertion Sort
+    //-------------------------------------------------------------------------
+    public static void InsertionSort(int[] array)
+    {
+        int nbArray = array.length;
+        for(int i=0; i< nbArray - 1; ++i)
+        {
+            for(int j = i+1; j>0; --j)
+            {
+                if(array[j] < array[j - 1])
+                {
+                    swap(array, j , j-1);
+                }
+                else{
+                    break;
+                }
+            }
         }
     }
 
@@ -65,7 +92,8 @@ public class Sorting{
 
     public static void main(String[] args)
     {
-        // Bubble sort cases
+        // // Bubble sort cases
+        // System.out.println("Bubble Sort...................");
         // int[] array = {8,7,6,5,4,3,2,1};
         // Sorting.BubbleSort(array);
         // System.out.println(Arrays.toString(array));
@@ -82,27 +110,58 @@ public class Sorting{
         // Sorting.BubbleSort(array4);
         // System.out.println(Arrays.toString(array4));
 
+        // System.out.println("------------------------------");
 
-        // Selection sort cases
+
+        // // Selection sort cases
+        // System.out.println("Selection Sort................");
+        // int[] array={5,4,3,2,1};
+        // SelectionSort(array);
+        // System.out.println(Arrays.toString(array));
+
+        // int[] array2={1,2,3,4,5,6};
+        // SelectionSort(array2);
+        // System.out.println(Arrays.toString(array2));
+
+        // int[] array3={-3, 5, -6, 2, 0, -1, 10};
+        // SelectionSort(array3);
+        // System.out.println(Arrays.toString(array3));
+
+        // int[] array4={5};
+        // SelectionSort(array4);
+        // System.out.println(Arrays.toString(array4));
+
+        // int[] array5={};
+        // SelectionSort(array5);
+        // System.out.println(Arrays.toString(array5));
+
+        // System.out.println("------------------------------");
+
+
+
+        // InsertionSort sort cases
+        System.out.println("Insertion Sort................");
         int[] array={5,4,3,2,1};
-        SelectionSort(array);
+        InsertionSort(array);
         System.out.println(Arrays.toString(array));
 
         int[] array2={1,2,3,4,5,6};
-        SelectionSort(array2);
+        InsertionSort(array2);
         System.out.println(Arrays.toString(array2));
 
         int[] array3={-3, 5, -6, 2, 0, -1, 10};
-        SelectionSort(array3);
+        InsertionSort(array3);
         System.out.println(Arrays.toString(array3));
 
         int[] array4={5};
-        SelectionSort(array4);
+        InsertionSort(array4);
         System.out.println(Arrays.toString(array4));
 
         int[] array5={};
-        SelectionSort(array5);
+        InsertionSort(array5);
         System.out.println(Arrays.toString(array5));
+
+        System.out.println("------------------------------");
 
     }
 }
