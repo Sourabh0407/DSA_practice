@@ -66,6 +66,47 @@ public class Sorting{
         }
     }
 
+    //-------------------------------------------------------------------------
+    // Cyclic Sort
+    // Conditions : 
+    //      array should be in range of 1 to n
+    //-------------------------------------------------------------------------
+    public static void CyclicSort(int[] array)
+    {
+        int nbArray = array.length;
+
+        for(int i = 0; i < nbArray; ++i)
+        {
+            while(array[i] != i+1)
+            {
+                swap(array, i, array[i] - 1);
+            }
+        }
+
+       /*
+         Approach 2
+
+         int nbArray = array.length;
+         int i = 0;
+         
+         while(i < nbArray)
+         {
+            int correct  = array[i] - 1;
+            if(array[i] != array[correct])
+            {
+                swap(array, i, correct);
+            }
+            else
+            {
+                ++i;
+            }
+         }
+
+        
+        */
+    }
+
+
     static int getMaxIndex(int[] array, int start, int end)
     {
         int max = array[start];
@@ -140,28 +181,124 @@ public class Sorting{
 
 
         // InsertionSort sort cases
-        System.out.println("Insertion Sort................");
+        // System.out.println("Insertion Sort................");
+        // int[] array={5,4,3,2,1};
+        // InsertionSort(array);
+        // System.out.println(Arrays.toString(array));
+
+        // int[] array2={1,2,3,4,5,6};
+        // InsertionSort(array2);
+        // System.out.println(Arrays.toString(array2));
+
+        // int[] array3={-3, 5, -6, 2, 0, -1, 10};
+        // InsertionSort(array3);
+        // System.out.println(Arrays.toString(array3));
+
+        // int[] array4={5};
+        // InsertionSort(array4);
+        // System.out.println(Arrays.toString(array4));
+
+        // int[] array5={};
+        // InsertionSort(array5);
+        // System.out.println(Arrays.toString(array5));
+
+        // System.out.println("------------------------------");
+
+
+        System.out.println("Cyclic Sort................");
         int[] array={5,4,3,2,1};
-        InsertionSort(array);
+        CyclicSort(array);
         System.out.println(Arrays.toString(array));
 
         int[] array2={1,2,3,4,5,6};
-        InsertionSort(array2);
+        CyclicSort(array2);
         System.out.println(Arrays.toString(array2));
 
-        int[] array3={-3, 5, -6, 2, 0, -1, 10};
-        InsertionSort(array3);
+        int[] array3={3,5,2,1,4};
+        CyclicSort(array3);
         System.out.println(Arrays.toString(array3));
 
-        int[] array4={5};
-        InsertionSort(array4);
+        int[] array4={1};
+        CyclicSort(array4);
         System.out.println(Arrays.toString(array4));
 
         int[] array5={};
-        InsertionSort(array5);
+        CyclicSort(array5);
         System.out.println(Arrays.toString(array5));
 
+        System.out.println("CyclicSort Questions......");
+
+        //Q1
+        System.out.println("LeetCode 268. Missing Number");
+        int[] array6={1,2,3,4,5,6,7,0};
+        int missingNumber = CyclicSortQuestions.missingNumber(array6);
+        System.out.println(Arrays.toString(array6)+" Missing num : "+missingNumber);
+
+        int[] array7={1,2,3,4,5,6,7};
+        int missingNumber2 = CyclicSortQuestions.missingNumber(array7);
+        System.out.println(Arrays.toString(array7)+" Missing num : "+missingNumber2);
+        
         System.out.println("------------------------------");
 
+    }
+}
+
+class CyclicSortQuestions
+{
+    //-------------------------------------------------------------------------
+    // Leetcode 268 :https://leetcode.com/problems/missing-number/description/
+    // Given an array nums containing n distinct numbers in the range [0, n], 
+    // return the only number in the range that is missing from the array.
+    //
+    //Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
+    //-------------------------------------------------------------------------
+    public static int missingNumber(int[] nums) {
+
+        int nbNums = nums.length;
+
+        int i=0;
+        
+        while(i < nbNums)
+        {
+            if(nums[i] < nbNums && nums[i] != nums[nums[i]])
+            {
+                swap(nums, i, nums[i]);
+            }
+            else 
+                ++i;
+        }
+
+        for( int j = 0; j<nbNums; ++j)
+        {
+            if(nums[j] != j)
+                return j;
+        }
+        return nbNums;
+
+        // Tried binary search, but fails if 0 is missing
+        // int ans = nbNums;
+        // int s = 0; 
+        // int e = nbNums - 1;
+        // while(s <= e)
+        // {
+        //     int mid = (s + e)/2;
+        //     if(nums[mid] != mid)
+        //     {
+        //         ans = mid;
+        //         e = mid-1;
+        //     }
+        //     else
+        //     {
+        //         s = mid+1;
+        //     }
+        // }
+        //return ans;
+    }
+
+    static void swap(int[] array, int index1, int index2)
+    {
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
     }
 }
