@@ -226,6 +226,9 @@ public class Sorting{
         CyclicSort(array5);
         System.out.println(Arrays.toString(array5));
 
+        
+      
+
         System.out.println("CyclicSort Questions......");
 
         //Q1
@@ -237,6 +240,10 @@ public class Sorting{
         int[] array7={1,2,3,4,5,6,7};
         int missingNumber2 = CyclicSortQuestions.missingNumber(array7);
         System.out.println(Arrays.toString(array7)+" Missing num : "+missingNumber2);
+
+        int[] array8={4,3,2,7,8,2,3,1,0};
+        int missingNumber3 = CyclicSortQuestions.missingNumber(array8);
+        System.out.println(Arrays.toString(array8)+" Missing num : "+missingNumber3);
         
         System.out.println("------------------------------");
 
@@ -295,6 +302,52 @@ class CyclicSortQuestions
         //return ans;
     }
 
+    //-------------------------------------------------------------------------
+    // https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
+    // Leetcode 448. Find All Numbers Disappeared in an Array
+    // Given an array nums of n integers where nums[i] is in the range [1, n], 
+    // return an array of all the integers in the range [1, n] that do not appear in nums.
+    // Follow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+    //-------------------------------------------------------------------------
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        
+        int nbNums = nums.length;
+
+        // Sort the array
+        int i = 0;
+        while(i < nbNums)
+        {
+            // if(nums[i] != nums[nums[i]-1])
+            // {
+            //     swap(nums, i, nums[i]-1);
+            // }
+            // else{
+            //     ++i;
+            // }
+            int correct  = nums[i] - 1;
+            if(nums[i] != nums[correct])
+            {
+                swap(nums, i, correct);
+            }
+            else
+            {
+                ++i;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+
+        /// Find missing numbers
+        List<Integer> ans = new ArrayList<>();
+        for(int j=0; j<nbNums; ++j)
+        {
+            if(nums[j] != j+1)
+            {
+                ans.add(j+1);
+            }
+        }
+
+        return ans;
+    }
     static void swap(int[] array, int index1, int index2)
     {
         int temp = array[index1];
